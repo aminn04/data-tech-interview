@@ -11,7 +11,7 @@ raw_customers AS (
    FROM raw.database.orders
    -- Select all customers regardless of status or signup date for simplicity
 ),
-
+### Comments for raw_customers
 
 -- Get order data
 raw_orders AS (
@@ -24,7 +24,7 @@ raw_orders AS (
    FROM {{ source('raw', 'orders') }} o
    WHERE o.order_status IN ('completed', 'shipped')
 ),
-
+### Comments for raw_orders
 
 order_totals AS (
    SELECT
@@ -36,7 +36,7 @@ order_totals AS (
    FROM raw_orders
    GROUP BY raw_orders.customer_id
 ),
-
+### Comments for order_totals
 
 customer_data AS (
    SELECT
@@ -51,7 +51,7 @@ customer_data AS (
    FROM raw_customers
    LEFT JOIN order_totals ON raw_customers.customer_id = order_totals.customer_id
 )
-
+### Comments for customer_data
 
 SELECT
    customer_data.customer_id,
@@ -67,4 +67,4 @@ SELECT
 FROM customer_data
 ORDER BY customer_data.total_spent DESC;
 
-### for code review
+### Comments for final
