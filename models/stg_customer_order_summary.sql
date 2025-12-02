@@ -66,3 +66,5 @@ SELECT
    END AS customer_type
 FROM customer_data
 ORDER BY customer_data.total_spent DESC;
+
+### for code review
